@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <meta charset="UTF-8">
-    <script type="text/javascript">
-        document.getElementById('#button').click(function(){
-            var product = document.getElementById('product').val();
-            var quantity = document.getElementById('quantity').val();
-            alert(product);
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<meta charset="UTF-8">
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#button').click(function(event){
+            var product = $('#product').val();
+            var quantity = $('#quantity').val();
+
+            event.preventDefault();
+
+            $.ajax({
+                type: 'post',
+                url: 'addtocart.php', // change to https://domain.com/configurator-addtocart
+                crossDomain: true,
+                cache: false,
+                traditional: true,
+                data: {
+                    quantitiesArray: quantity,
+                    productsArray: product
+                },
+                error: function(data, xhr, textStatus, error){
+                    alert('Request Failed');
+                    console.log(data);
+                    console.log(xhr.statusText);
+                    console.log(textStatus);
+                    console.log(error);
+                },
+                success: function(data){
+                    console.log(data); // change to window.location.href = 'https://domain.com/checkout/cart/';
+                }
+            })
         });
-    </script>
+    });
+</script>
 </head>
 <body>
 <form id="form" method="POST">
