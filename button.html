@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        var quantity = "";
+        var product = "";
+        $("#button").click(function() {
+            quantity = $("#quantity").val();
+            product = $("#product").val();
+            function sendData() {
+                $.ajax({
+                    type: "POST",
+                    url: "https://mbs-standoffs.com/configurator-addtocart",
+                    data: {
+                        quantitiesArray: quantity,
+                        productsArray: product
+                    }
+                });
+            }
+
+            var promise = sendData();
+
+            promise.success(function (data) {
+                console.log(data);
+                window.location.href = 'https://mbs-standoffs.com/checkout/cart/';
+            });
+        });
+    </script>
+</head>
+<body>
+<form id="form" method="POST">
+    <input type="hidden" id="product" name="product" value="SBLS12-12">
+    <input type="number" id="quantity" title="quantity" name="quantity" min="1" value="1">
+    <button type="submit" id="button" name="button">Order Now</button>
+</form>
+</body>
+</html>

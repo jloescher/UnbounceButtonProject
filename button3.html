@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+        document.getElementById('#button').click(function(){
+            var product = document.getElementById('product').val();
+            var quantity = document.getElementById('quantity').val();
+            alert(product);
+        });
+    </script>
+</head>
+<body>
+<form id="form" method="POST">
+    <input type="hidden" id="product" name="product" value="SBLS12-12">
+    <input type="number" id="quantity" title="quantity" name="quantity" min="1" value="1">
+    <button type="submit" id="button" name="button">Order Now</button>
+</form>
+</body>
+</html>
